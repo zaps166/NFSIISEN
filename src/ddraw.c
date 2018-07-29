@@ -709,6 +709,7 @@ STDCALL uint32_t DirectDrawCreNFS(void *lpGUID, DirectDraw ***lplpDD, void *pUnk
 	ddraw->SetCooperativeLevel = DDraw_SetCooperativeLevel;
 	ddraw->SetDisplayMode = DDraw_SetDisplayMode;
 	ddraw->WaitForVerticalBlank = DDraw_WaitForVerticalBlank;
+	ddraw->GetAvailableVidMem = DDraw_GetAvailableVidMem;
 
 	return 0;
 }
