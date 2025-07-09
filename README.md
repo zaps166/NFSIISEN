@@ -10,4 +10,3 @@ Download game files from "Release" section and unpack. Copy `fedata` and `gameda
 ### Wine notes
 - screen resolution is not changed on Wine - if the game runs too slow, change screen resolution manually (game uses 640x480),
 - if keyboard doesn't work, press Alt-Tab to focus game window,
-- if game won't start, kill the process and start again.
