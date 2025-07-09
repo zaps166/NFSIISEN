@@ -606,37 +606,6 @@ static STDCALL uint32_t DDraw_SetCooperativeLevel(DirectDraw **this, HWND hWnd, 
 {
 	trace();
 
-	BOOL isWine = FALSE;
-
-	HMODULE ntdll = LoadLibrary("ntdll.dll");
-	if (ntdll)
-	{
-		isWine = !!GetProcAddress(ntdll, "wine_get_version");
-		FreeLibrary(ntdll);
-	}
-
-	if (isWine == FALSE)
-	{
-		HMONITOR monitor = MonitorFromWindow(hWnd, MONITOR_DEFAULTTONULL);
-		if (monitor)
-		{
-			MONITORINFOEX info;
-			info.cbSize = sizeof(MONITORINFOEX);
-			if (GetMonitorInfo(monitor, (LPMONITORINFO)&info))
-			{
-				DEVMODE mode;
-				memset(&mode, 0, sizeof(DEVMODE));
-				mode.dmSize = sizeof(DEVMODE);
-				mode.dmPelsWidth = 640;
-				mode.dmPelsHeight = 480;
-				mode.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT;
-				if (ChangeDisplaySettingsEx(info.szDevice, &mode, NULL, CDS_FULLSCREEN, NULL) == DISP_CHANGE_SUCCESSFUL)
-					MoveWindow(hWnd, info.rcMonitor.left, info.rcMonitor.top, 640, 480, FALSE);
-			}
-			CloseHandle(monitor);
-		}
-	}
-
 	(*this)->win = SDL_CreateWindowFrom(hWnd);
 	(*this)->renderer = SDL_CreateRenderer((*this)->win, -1, 0);
 
